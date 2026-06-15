@@ -10,14 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy via SSH
-        uses: appleboy/scp-action@v0.1.7
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          host: ${{ secrets.SSH_HOST }}
+          server: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASS }}
-          source: "."
-          target: "/home/azlbfqigue/domains/przemyslawskokowski.pl/public_html"
-          strip_components: 0
-          rm: false
+          local_path: "./*"
+          remote_path: "/home/azlbfqigue/domains/przemyslawskokowski.pl/public_html"
+          sftp_only: true
